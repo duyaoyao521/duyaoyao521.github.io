@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yangxiaokang-ai.github.io</id>
     <title>毒药i</title>
-    <updated>2020-07-29T09:55:33.416Z</updated>
+    <updated>2020-07-29T09:58:44.435Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yangxiaokang-ai.github.io"/>
     <link rel="self" href="https://yangxiaokang-ai.github.io/atom.xml"/>
@@ -10,92 +10,6 @@
     <logo>https://yangxiaokang-ai.github.io/images/avatar.png</logo>
     <icon>https://yangxiaokang-ai.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 毒药i</rights>
-    <entry>
-        <title type="html"><![CDATA[Centos离线安装BotFront]]></title>
-        <id>https://yangxiaokang-ai.github.io/post/centos-chi-xian-an-zhuang-botfront/</id>
-        <link href="https://yangxiaokang-ai.github.io/post/centos-chi-xian-an-zhuang-botfront/">
-        </link>
-        <updated>2020-07-29T09:53:23.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="1安装nodejs">1.安装<code>NodeJS</code></h2>
-<h3 id="11-下载最新版本的nodejs">1.1 下载最新版本的NodeJS</h3>
-<p>地址 https://nodejs.org/en/download/</p>
-<h3 id="12上传至服务器并执行命令">1.2上传至服务器并执行命令</h3>
-<pre><code class="language-bash">tar -xvf node-v12.18.2-linux-x64.tar.xz
-</code></pre>
-<h3 id="13创建并改名文件夹">1.3创建并改名文件夹</h3>
-<pre><code class="language-bash">sudo mv node-v12.18.2-linux-x64/  nodejs
-cp nodejs /usr/local/nodejs
-</code></pre>
-<h3 id="14创建软链接">1.4创建软链接</h3>
-<pre><code class="language-bash">ln -s /usr/local/nodejs/bin/npm /usr/local/bin/
-ln -s /usr/local/nodejs/bin/node /usr/local/bin/
-
-</code></pre>
-<h3 id="15验证是否成功">1.5验证是否成功</h3>
-<pre><code class="language-bash">node -v
-npm -v
-</code></pre>
-<h2 id="2docker环境离线安装">2.<code>Docker</code>环境离线安装</h2>
-<h3 id="21下载3个离线安装">2.1下载3个离线安装</h3>
-<p><a href="http://mirror.centos.org/centos/7/os/x86_64/Packages/libtool-ltdl-2.4.2-22.el7_3.x86_64.rpm">libtool-ltdl-2.4.2-22.el7_3.x86_64.rpm</a></p>
-<p><a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm">docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm</a></p>
-<p><a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm">docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm</a></p>
-<h3 id="22-上传至服务器并执行命令安装">2.2 上传至服务器并执行命令安装</h3>
-<pre><code class="language-bash">rpm -ivh libtool-ltdl-2.4.2-22.el7_3.x86_64.rpm
-rpm -ivh docker-ce-17.03.2.ce-1.el7.centos.x86_64.rpm
-rpm -ivh docker-ce-selinux-17.03.2.ce1.el7.centos.noarch.rpm
-</code></pre>
-<h3 id="23启动docker">2.3启动docker</h3>
-<pre><code class="language-bash">sudo systemctl start docker
-</code></pre>
-<h3 id="24修改docker权限">2.4修改docker权限</h3>
-<pre><code class="language-bash">#查看是否有docker这个用户组
-sudo cat /etc/group | grep docker
-#如果没有执行创建
-sudo groupadd docker 
-#把当前用户加入用户组
-sudo gpasswd -a ${USER} docker
-#刷新用户组
-newgrp - docker
-#q启动docker
-sudo systemctl restart docker
-</code></pre>
-<h3 id="25-安装docker-compose">2.5 安装docker-compose</h3>
-<p>[docker-compose-Linux-x86_64 下载](https://github-production-release-asset-2e65be.s3.amazonaws.com/15045751/9b9b8b80-bc96-11ea-90a7-9b1e9c5a586c?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200706%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200706T091805Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=64bde8a2163b0d980e9647cc81b1d1c02687cbb5887a389cebdad573c6e25161&amp;X-Amz-SignedHeaders=host&amp;actor_id=0&amp;repo_id=15045751&amp;response-content-disposition=attachment%3B filename%3Ddocker-compose-Linux-x86_64&amp;response-content-type=application%2Foctet-stream)</p>
-<p>上传至服务器后执行</p>
-<pre><code class="language-bash">#移动
-sudo mv docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
-#更改权限
-sudo chmod +x /usr/local/bin/docker-compose
-#执行验证
-docker-compose -v 
-</code></pre>
-<h2 id="3离线安装botfront">3.离线安装<code>botfront</code></h2>
-<h3 id="31-压缩本地文件">3.1 压缩本地文件</h3>
-<p>找到本地的<strong>node_modules</strong> 文件夹下的botfront文件夹 并压缩为<code>botfront.zip</code></p>
-<h3 id="32上传至服务器">3.2上传至服务器</h3>
-<h3 id="33-运行命令">3.3 运行命令</h3>
-<pre><code class="language-bash">unzip botfront.zip
-npm install -g ./botfront
-echo -e &quot;export PATH=$(npm prefix -g)/bin:$PATH&quot; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc#防止botfront 不生效
-</code></pre>
-<h3 id="34安装成功后">3.4安装成功后</h3>
-<pre><code class="language-bash">botfront init
-</code></pre>
-<p>根据命令提示，创建一个名叫chatbot的文件夹</p>
-<pre><code class="language-bash">cd chatbot
-botfront up
-</code></pre>
-<h3 id="35修改botfront-远程访问">3.5修改botfront 远程访问</h3>
-<p>通过修改 .botfront/botfront.yml 和 ./botfront/docker-compose-template.yml 可以修改服务端口及地址</p>
-<p>注 修改地址时候要修改项目启动后的</p>
-<pre><code class="language-yaml">rasa_addons.core.channels.webchat.WebchatInput:
- session_persistence: true
- base_url: 'http://localhost:5005'
- socket_path: /socket.io/
-</code></pre>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://yangxiaokang-ai.github.io/post/hello-gridea/</id>
